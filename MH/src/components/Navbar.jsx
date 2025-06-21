@@ -1,40 +1,37 @@
 import React from 'react';
-import { Nav } from 'react-bootstrap';
+import { Navbar, Nav, Container } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import hibachiLogo from '../assets/My Hibachi logo.png'; // Adjust path if necessary
+import hibachiLogo from '../assets/My Hibachi logo.png'; // Adjust path if needed
 
-const Navbar = () => (
-  <nav
-    className="navbar"
-    style={{
-      display: "flex",
-      alignItems: "center",
-      padding: "10px 24px",
-      background: "#000",
-      boxShadow: "0 2px 8px rgba(0,0,0,0.05)",
-      position: "sticky",
-      top: 0,
-      zIndex: 1000
-    }}
-  >
-    <a href="/" className="navbar-brand" style={{ display: "flex", alignItems: "center" }}>
-      <img
-        src={hibachiLogo}
-        alt="My Hibachi Logo"
-        style={{ height: '200px', objectFit: 'contain' }}
-      />
-    </a>
-    <div style={{ flex: 1 }}>
-      <Nav className="ms-auto justify-content-end" style={{ display: "flex", width: "100%" }}>
-        <Nav.Link as={Link} to="/" className="mx-2" style={{ color: "#FFD700", fontWeight: "bold" }}>About</Nav.Link>
-        <Nav.Link as={Link} to="/services" className="mx-2" style={{ color: "#FFD700", fontWeight: "bold" }}>Book now</Nav.Link>
-        <Nav.Link as={Link} to="/menu" className="mx-2" style={{ color: "#FFD700", fontWeight: "bold" }}>Menu</Nav.Link>
-        <Nav.Link as={Link} to="/reviews" className="mx-2" style={{ color: "#FFD700", fontWeight: "bold" }}>Reviews</Nav.Link>
-        <Nav.Link as={Link} to="/faqs" className="mx-2" style={{ color: "#FFD700", fontWeight: "bold" }}>FAQs</Nav.Link>
-        <Nav.Link as={Link} to="/contact" className="mx-2" style={{ color: "#FFD700", fontWeight: "bold" }}>Contact</Nav.Link>
-      </Nav>
-    </div>
-  </nav>
+const CustomNavbar = () => (
+  <Navbar expand="lg" sticky="top" bg="dark" variant="dark">
+    <Container>
+      <Navbar.Brand as={Link} to="/">
+        <img
+          src={hibachiLogo}
+          alt="My Hibachi Logo"
+          width="200"
+          height="80"
+          loading="eager" // Don't lazy-load logos or header images
+          style={{
+            objectFit: 'contain',
+            display: 'block'
+          }}
+        />
+      </Navbar.Brand>
+      <Navbar.Toggle aria-controls="basic-navbar-nav" />
+      <Navbar.Collapse id="basic-navbar-nav">
+        <Nav className="ms-auto text-center">
+          <Nav.Link as={Link} to="/" style={{ color: "#FFD700", fontWeight: "bold", textShadow: "0 0 2px #000" }}>About</Nav.Link>
+          <Nav.Link as={Link} to="/services" style={{ color: "#FFD700", fontWeight: "bold", textShadow: "0 0 2px #000" }}>Book Now</Nav.Link>
+          <Nav.Link as={Link} to="/menu" style={{ color: "#FFD700", fontWeight: "bold", textShadow: "0 0 2px #000" }}>Menu</Nav.Link>
+          <Nav.Link as={Link} to="/reviews" style={{ color: "#FFD700", fontWeight: "bold", textShadow: "0 0 2px #000" }}>Reviews</Nav.Link>
+          <Nav.Link as={Link} to="/faqs" style={{ color: "#FFD700", fontWeight: "bold", textShadow: "0 0 2px #000" }}>FAQs</Nav.Link>
+          <Nav.Link as={Link} to="/contact" style={{ color: "#FFD700", fontWeight: "bold", textShadow: "0 0 2px #000" }}>Contact</Nav.Link>
+        </Nav>
+      </Navbar.Collapse>
+    </Container>
+  </Navbar>
 );
 
-export default Navbar;
+export default CustomNavbar;
