@@ -1,13 +1,15 @@
 {
   "name": "mh",
   "private": true,
+  "homepage": "https://D3adchef.github.io/MH-web",
   "version": "0.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "lint": "eslint .",
     "preview": "vite preview",
+    "deploy": "gh-pages -d dist",
+    "lint": "eslint .",
     "test": "jest"
   },
   "dependencies": {
@@ -42,6 +44,7 @@
     "eslint": "^9.25.0",
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.19",
+    "gh-pages": "^6.3.0",
     "globals": "^16.0.0",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^30.0.1",
@@ -66,4 +69,5 @@
       "<rootDir>/src/setupTests.js"
     ]
   }
+}
 }
