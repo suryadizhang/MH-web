@@ -293,7 +293,7 @@ const groupedFAQs = {
 
 const FAQs = () => (
   <div className="p-4">
-    <h2 className="text-center fw-bold mb-5">Frequently Asked Questions</h2>
+    <h1 className="text-center fw-bold mb-5">Frequently Asked Questions</h1>
     <Accordion flush>
       {Object.entries(groupedFAQs).map(([category, questions], catIdx) => (
         <Accordion.Item eventKey={catIdx.toString()} key={category}>
