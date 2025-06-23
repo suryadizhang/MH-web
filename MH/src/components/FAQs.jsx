@@ -295,7 +295,57 @@ const FAQs = () => (
   <div className="p-4">
     <h1 className="text-center fw-bold mb-5">Frequently Asked Questions</h1>
     <Accordion flush>
-      {Object.entries(groupedFAQs).map(([category, questions], catIdx) => (
+You can extract the nested‐Accordion logic into a small reusable `<FAQCategory>` component, which will make `FAQs` much easier to read and maintain:
+
+// src/components/FAQCategory.js  
+import React from 'react';  
+import { Accordion } from 'react-bootstrap';  
+
+const FAQCategory = ({ eventKey, title, items }) => (  
+  <Accordion.Item eventKey={eventKey}>  
+    <Accordion.Header>{title}</Accordion.Header>  
+    <Accordion.Body>  
+      <Accordion flush>  
+        {items.map((faq, i) => (  
+          <Accordion.Item eventKey={`${eventKey}-${i}`} key={faq.header}>  
+            <Accordion.Header>{faq.header}</Accordion.Header>  
+            <Accordion.Body>{faq.body}</Accordion.Body>  
+          </Accordion.Item>  
+        ))}  
+      </Accordion>  
+    </Accordion.Body>  
+  </Accordion.Item>  
+);  
+
+export default FAQCategory;  
+
+---  
+
+Then simplify `FAQs.js` to just map categories to `<FAQCategory>`:
+
+// src/components/FAQs.js  
+import React from 'react';  
+import { Accordion } from 'react-bootstrap';  
+import FAQCategory from './FAQCategory';  
+import groupedFAQs from './groupedFAQs';  
+
+const FAQs = () => (  
+  <div className="p-4">  
+    <h2 className="text-center fw-bold mb-5">Frequently Asked Questions</h2>  
+    <Accordion flush>  
+      {Object.entries(groupedFAQs).map(([category, items], idx) => (  
+        <FAQCategory  
+          key={category}  
+          eventKey={idx.toString()}  
+          title={category}  
+          items={items}  
+        />  
+      ))}  
+    </Accordion>  
+  </div>  
+);  
+
+export default FAQs;  
         <Accordion.Item eventKey={catIdx.toString()} key={category}>
           <Accordion.Header>{category}</Accordion.Header>
           <Accordion.Body>
