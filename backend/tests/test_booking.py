@@ -46,11 +46,11 @@ async def test_booking_and_fully_booked():
         payload = {
             "name": "Test User",
             "phone": "1234567890",
-            "email": "test@example.com",
+            "email": "suryadizhang.chef@gmail.com",  # <-- your real email here
             "address": "123 Test St",
             "city": "Testville",
             "zipcode": "12345",
-            "date": test_date,
+            "date": test_date,  # or your test date variable
             "time_slot": "12:00 PM",
             "contact_preference": "email"
         }

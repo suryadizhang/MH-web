@@ -15,9 +15,6 @@ import CreditCardPayment from "./components/CreditCardPayment";
 import PartyGuestProteinForm from "./components/PartyGuestProteinForm";
 import AdminLogin from './components/AdminLogin';
 import AdminPanel from "./components/AdminPanel";
-import ReactDOM from 'react-dom/client';
-import { Provider } from 'react-redux';
-import store from './store';
 
 function App() {
   return (
@@ -41,12 +38,5 @@ function App() {
     </Router>
   );
 }
-
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <Provider store={store}>
-    <App />
-  </Provider>
-);
 
 export default App;

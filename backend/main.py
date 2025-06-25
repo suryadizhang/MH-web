@@ -1,3 +1,6 @@
+from dotenv import load_dotenv
+load_dotenv()
+
 from fastapi import FastAPI
 from slowapi import Limiter, _rate_limit_exceeded_handler
 from slowapi.util import get_remote_address
@@ -5,14 +8,9 @@ from slowapi.errors import RateLimitExceeded
 from app.routes import router
 from fastapi.responses import JSONResponse
 from fastapi.requests import Request
-from fastapi.exception_handlers import RequestValidationError
 from fastapi.exceptions import RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
 import logging
-from dotenv import load_dotenv
-
-# Load environment variables from .env file
-load_dotenv()
 
 # Initialize FastAPI app
 app = FastAPI()
@@ -48,17 +46,18 @@ logger = logging.getLogger("booking")
 # Global exception handler
 @app.exception_handler(Exception)
 async def global_exception_handler(request: Request, exc: Exception):
-    import logging
-    logging.getLogger("booking").error(f"Unhandled error: {exc}")
+    logger.error(f"Unhandled error: {exc}")
     return JSONResponse(
         status_code=500,
         content={"detail": "Internal server error. Please try again later."},
     )
 
+# 404 Not Found handler
 @app.exception_handler(404)
 async def not_found_handler(request: Request, exc):
     return JSONResponse(status_code=404, content={"detail": "Not Found"})
 
+# Validation error handler
 @app.exception_handler(RequestValidationError)
 async def validation_exception_handler(request: Request, exc: RequestValidationError):
     return JSONResponse(
@@ -66,6 +65,7 @@ async def validation_exception_handler(request: Request, exc: RequestValidationE
         content={"detail": exc.errors(), "body": exc.body},
     )
 
+# Root endpoint
 @app.get("/")
 def root():
-    return {"message": "My hibachi"}  # Or any message you want
+    return {"message": "My hibachi"}
