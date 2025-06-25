@@ -1,4 +1,3 @@
-
 # 🍱 My Hibachi - Private Hibachi Chef Web App
 
 Welcome to the **My Hibachi** project!  
@@ -149,3 +148,54 @@ Deploy to services like Render, Railway, Heroku, or AWS.
 ## 📄 License
 
 MIT License
+
+---
+
+# MH Web Backend
+
+## Setup
+
+1. **Clone the repository and navigate to the backend folder.**
+
+2. **Create and activate a virtual environment:**
+   ```sh
+   python -m venv .venv
+   # On Windows PowerShell:
+   .venv\Scripts\Activate.ps1
+   # On Windows CMD:
+   .venv\Scripts\activate.bat
+   ```
+
+3. **Install dependencies:**
+   ```sh
+   pip install -r requirements.txt
+   ```
+
+4. **Set up environment variables:**
+   - Copy `.env.example` to `.env` (if exists) or edit `.env` directly.
+   - Fill in `SECRET_KEY`, `SMTP_USER`, and `SMTP_PASS`.
+
+5. **Run database migrations:**
+   ```sh
+   alembic upgrade head
+   ```
+
+6. **Start the server:**
+   ```sh
+   uvicorn main:app --host 0.0.0.0 --port 8000 --workers 4
+   ```
+
+## Testing
+
+```sh
+pytest
+```
+
+## API Docs
+
+Visit [http://localhost:8000/docs](http://localhost:8000/docs)
+
+## Production
+
+- Use PostgreSQL or MySQL for production deployments.
+- Use a process manager (systemd, supervisor, Docker) and a reverse proxy (Nginx, Caddy) for HTTPS.
